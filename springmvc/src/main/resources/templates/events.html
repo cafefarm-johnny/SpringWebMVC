@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<!--
+    Thymeleaf를 사용하려면 네임스페이스를 정의해야한다.
+    xmlnamesapce로 : th를 정의하겠다 = "http://www.thymeleaf.org"에 정의해놓았다.
+-->
+<html lang="ko" xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>이벤트 목록</h1>
+    <table>
+        <tr>
+            <th>이벤트 이름</th>
+            <th>참가 인원</th>
+            <th>시작</th>
+            <th>종료</th>
+        </tr>
+        <!--
+            모델로 전달된 events의 엘리먼트를 event에 참조한다.
+         -->
+        <tr th:each="event: ${events}">
+            <td th:text="${event.name}">이벤트 이름</td>
+            <td th:text="${event.limitOfEnrollment}">100</td>
+            <td th:text="${event.startDateTime}">2019년 1월 10일 오전 10시</td>
+            <td th:text="${event.endDateTime}">2019년 1월 10일 오후 12시</td>
+        </tr>
+    </table>
+</body>
+</html>
