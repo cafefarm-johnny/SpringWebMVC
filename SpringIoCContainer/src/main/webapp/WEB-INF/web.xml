@@ -1,0 +1,61 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+  
+   <!-- 
+  		ContextLoaderListener가 contextConfigLocation의 설정파일을 가지고 AnnotationConfigWebApplicationContext를 만든다.
+  		이렇게되면 스프링 애플리케이션 컨텍스트 안에는 HelloService라는 스프링 빈 객체가 들어있게 된다.
+  		그리고 이후에 서블릿 컨텍스트에 등록하여 HelloService를 꺼내서 사용할 수 있게 된다.
+   -->
+  <context-param>
+  	<param-name>contextClass</param-name>
+  	<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+  </context-param>
+  
+  <context-param>
+  	<param-name>contextConfigLocation</param-name>
+  	<param-value>com.johnny.AppConfig</param-value>
+  </context-param>
+  
+  
+  <!-- Filter -->
+  <filter>
+  	<filter-name>myFilter</filter-name>
+  	<filter-class>com.johnny.MyFilter</filter-class>
+  </filter>
+  
+  <filter-mapping>
+  	<filter-name>myFilter</filter-name>
+  	<servlet-name>hello</servlet-name>
+  </filter-mapping>
+  
+  <!-- Listener 등록 * 반드시 Servlet 등록 위에 작성 -->
+  <!--
+  <listener>
+  	<listener-class>com.johnny.MyListener</listener-class>
+  </listener>
+   -->
+   
+   <!-- 스프링이 제공해주는 컨텍스트 로더 리스너를 추가 -->
+   <!-- 
+   		스프링이 제공해주는 애플리케이션 컨텍스트를 서블릿 컨텍스트에 등록해준다.
+   		그리고 서블릿이 종료될 시점에 라이프 사이클에 맞춰서 제거해주는 역할을 한다.
+	-->
+   <listener>
+   	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+   </listener>
+  
+  <!-- Servlet 등록 -->
+  <servlet>
+  	<servlet-name>hello</servlet-name>
+  	<servlet-class>com.johnny.HelloServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>hello</servlet-name>
+  	<url-pattern>/hello</url-pattern>
+  </servlet-mapping>
+</web-app>
