@@ -1,0 +1,33 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+  
+  <filter>
+  	<filter-name>myFilter</filter-name>
+  	<filter-class>com.johnny.MyFilter</filter-class>
+  </filter>
+  
+  <filter-mapping>
+  	<filter-name>myFilter</filter-name>
+  	<servlet-name>hello</servlet-name>
+  </filter-mapping>
+  
+  <!-- Listener 등록 * 반드시 Servlet 등록 위에 작성 -->
+  <listener>
+  	<listener-class>com.johnny.MyListener</listener-class>
+  </listener>
+  
+  <!-- Servlet 등록 -->
+  <servlet>
+  	<servlet-name>hello</servlet-name>
+  	<servlet-class>com.johnny.HelloServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>hello</servlet-name>
+  	<url-pattern>/hello</url-pattern>
+  </servlet-mapping>
+</web-app>
